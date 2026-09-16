@@ -3,6 +3,7 @@ import { CanvasHeader } from "./components/CanvasHeader";
 import { CanvasHero } from "./components/CanvasHero";
 import { CanvasAbout } from "./components/CanvasAbout";
 import { CanvasAcademics } from "./components/CanvasAcademics";
+import { CanvasActivities } from "./components/CanvasActivities";
 import { CanvasWorks } from "./components/CanvasWorks";
 import { CanvasServices } from "./components/CanvasServices";
 import { CanvasContact } from "./components/CanvasContact";
@@ -17,7 +18,7 @@ export function CanvasStudioApp() {
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
 
-  // Loader fades out at 2.25s over 0.4s → fully gone at 2.65s
+  // Loader fades out at 2.25s over 0.4s â†’ fully gone at 2.65s
   // Unmount loader overlay slightly after content is revealed
   useEffect(() => {
     const contentTimer = setTimeout(() => setContentReady(true), 2650);
@@ -25,12 +26,24 @@ export function CanvasStudioApp() {
     return () => { clearTimeout(contentTimer); clearTimeout(loaderTimer); };
   }, []);
 
+  const [cursorVisible, setCursorVisible] = useState(false);
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
+      setCursorVisible(true);
     };
+    const handleMouseLeave = () => setCursorVisible(false);
+    const handleMouseEnter = () => setCursorVisible(true);
+
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+    };
   }, []);
 
   const handleNavigate = (sectionId: string) => {
@@ -60,20 +73,23 @@ export function CanvasStudioApp() {
       )}
 
 
-      {/* Background Canvas Grid Pattern — only after loader */}
+      {/* Background Canvas Grid Pattern â€” only after loader */}
       {contentReady && gridEnabled && (
         <div className="fixed inset-0 bg-canvas-grid pointer-events-none z-0"></div>
       )}
 
-      {/* Interactive Custom Canvas Mouse Cursor Trail (Desktop only) */}
+      {/* Interactive Custom Canvas Mouse Cursor (Desktop only, replacing default cursor) */}
       <div
-        className="hidden md:flex fixed pointer-events-none z-[999] transition-transform duration-75 items-center gap-1.5"
-        style={{ transform: `translate3d(${cursorPos.x}px, ${cursorPos.y}px, 0)` }}
+        className={`hidden md:flex fixed top-0 left-0 pointer-events-none z-[9999] items-center gap-1.5 transition-opacity duration-150 ${cursorVisible ? "opacity-100" : "opacity-0"}`}
+        style={{
+          transform: `translate3d(${cursorPos.x}px, ${cursorPos.y}px, 0)`,
+          willChange: "transform",
+        }}
       >
-        <svg className="w-4 h-4 fill-cyan-400 drop-shadow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 2l18 9-9 2-2 9z"/>
+        <svg className="w-4 h-4 fill-[#0099FF] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 2l18 9-9 2-2 9z" stroke="white" strokeWidth="1.2" />
         </svg>
-        <span className="px-2 py-0.5 rounded bg-cyan-400 text-black font-mono font-bold text-[10px] shadow-sm">
+        <span className="px-2 py-0.5 rounded bg-[#0099FF] text-white font-mono font-bold text-[10px] shadow-sm select-none">
           You
         </span>
       </div>
@@ -88,6 +104,7 @@ export function CanvasStudioApp() {
             <CanvasHero onNavigate={handleNavigate} />
             <CanvasAbout />
             <CanvasAcademics />
+            <CanvasActivities />
             <CanvasWorks />
             <CanvasServices />
             <CanvasContact />
@@ -111,3 +128,4 @@ function FooterText() {
     </footer>
   );
 }
+
