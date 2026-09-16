@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { CanvasHeader } from "./components/CanvasHeader";
 import { CanvasHero } from "./components/CanvasHero";
 import { CanvasAbout } from "./components/CanvasAbout";
@@ -65,9 +65,9 @@ export function CanvasStudioApp() {
         <div className="fixed inset-0 bg-canvas-grid pointer-events-none z-0"></div>
       )}
 
-      {/* Interactive Custom Canvas Mouse Cursor Trail */}
+      {/* Interactive Custom Canvas Mouse Cursor Trail (Desktop only) */}
       <div
-        className="fixed pointer-events-none z-[999] transition-transform duration-75 flex items-center gap-1.5"
+        className="hidden md:flex fixed pointer-events-none z-[999] transition-transform duration-75 items-center gap-1.5"
         style={{ transform: `translate3d(${cursorPos.x}px, ${cursorPos.y}px, 0)` }}
       >
         <svg className="w-4 h-4 fill-cyan-400 drop-shadow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
