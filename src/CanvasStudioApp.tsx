@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { CanvasHeader } from "./components/CanvasHeader";
 import { CanvasHero } from "./components/CanvasHero";
 import { CanvasAbout } from "./components/CanvasAbout";
 import { CanvasAcademics } from "./components/CanvasAcademics";
+import { CanvasActivities } from "./components/CanvasActivities";
 import { CanvasWorks } from "./components/CanvasWorks";
 import { CanvasServices } from "./components/CanvasServices";
 import { CanvasContact } from "./components/CanvasContact";
@@ -17,7 +18,7 @@ export function CanvasStudioApp() {
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
 
-  // Loader fades out at 2.25s over 0.4s → fully gone at 2.65s
+  // Loader fades out at 2.25s over 0.4s â†’ fully gone at 2.65s
   // Unmount loader overlay slightly after content is revealed
   useEffect(() => {
     const contentTimer = setTimeout(() => setContentReady(true), 2650);
@@ -60,7 +61,7 @@ export function CanvasStudioApp() {
       )}
 
 
-      {/* Background Canvas Grid Pattern — only after loader */}
+      {/* Background Canvas Grid Pattern â€” only after loader */}
       {contentReady && gridEnabled && (
         <div className="fixed inset-0 bg-canvas-grid pointer-events-none z-0"></div>
       )}
@@ -88,6 +89,7 @@ export function CanvasStudioApp() {
             <CanvasHero onNavigate={handleNavigate} />
             <CanvasAbout />
             <CanvasAcademics />
+            <CanvasActivities />
             <CanvasWorks />
             <CanvasServices />
             <CanvasContact />
@@ -111,3 +113,4 @@ function FooterText() {
     </footer>
   );
 }
+

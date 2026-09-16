@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { useLanguage } from "../LanguageContext";
 
 const DESIGN_CATEGORIES = ["UI/UX", "UI/UX & Branding", "Graphic Design", "Branding"];

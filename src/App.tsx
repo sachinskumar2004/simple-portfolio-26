@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { CanvasHeader } from "./components/CanvasHeader";
 import { CanvasHero } from "./components/CanvasHero";
 import { CanvasAbout } from "./components/CanvasAbout";

@@ -1,9 +1,11 @@
-export * from "./CanvasPreloader";
+﻿export * from "./CanvasPreloader";
 export * from "./CanvasHeader";
 export * from "./CanvasHero";
 export * from "./CanvasAbout";
 export * from "./CanvasAcademics";
+export * from "./CanvasActivities";
 export * from "./CanvasWorks";
 export * from "./CanvasServices";
 export * from "./CanvasContact";
 export * from "./CanvasToolbar";
+

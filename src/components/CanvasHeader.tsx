@@ -53,7 +53,7 @@ export function CanvasHeader({ onNavigate, activeSection, darkMode, onToggleDark
           </nav>
         </div>
 
-        {/* Center Live Clock Badge — absolutely centered */}
+        {/* Center Live Clock Badge ??? absolutely centered */}
         <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-2 px-3 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 text-[11px] font-mono">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
           <span>{time || "7:23:34 PM"}</span>
@@ -74,7 +74,7 @@ export function CanvasHeader({ onNavigate, activeSection, darkMode, onToggleDark
               onClick={() => setLang("ml")}
               className={`transition-colors cursor-pointer font-sans ${lang === "ml" ? "text-black dark:text-white" : "opacity-40 hover:opacity-70"}`}
             >
-              മല
+              {String.fromCharCode(0x0D2E, 0x0D32)}
             </button>
           </div>
 
@@ -128,3 +128,4 @@ export function CanvasHeader({ onNavigate, activeSection, darkMode, onToggleDark
     </header>
   );
 }
+
